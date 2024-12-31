@@ -15,7 +15,7 @@ public class StartPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        getServletContext().getRequestDispatcher("/WEB-INF/views/mainPage1.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/mainPage.jsp").forward(request, response);
     }
 
 }
