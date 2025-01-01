@@ -5,32 +5,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Probability theory formulas</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
     <%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js"></script> <!-- Библиотека для математических вычислений -->--%>
     <%--    <script src="${pageContext.request.contextPath}/scripts/calculator.js"></script> </head>--%>
 <body>
+<div class="container">
+    <form id="calculatorForm" method="post">
+        <h1>Выберите формулу</h1>
+        <select id="formulaSelect" name="operation">
+            <option value="">Выберете формулу</option>
+            <option value="permutations_without_repetitions">Размещения без повторений</option>
+            <option value="permutations_with_repetitions">Размещения с повторениями</option>
+            <option value="arrangements_without_repetitions">Перестановки без повторений</option>
+            <option value="arrangements_with_repetitions">Перестановки с повторениями</option>
+            <option value="combinations_without_repetitions">Сочетания без повторений</option>
+            <option value="combinations_with_repetitions">Сочетания с повторениями</option>
+            <option value="urn_model_all_marked_items">Урновая модель (все меченные)</option>
+            <option value="urn_model_r_marked_items">Урновая модель (r меченных)</option>
+        </select>
 
-<form id="calculatorForm" method="post">
-    <h1>Выберите формулу</h1>
-    <select id="formulaSelect" name="operation">
-        <option value="">Выберете формулу</option>
-        <option value="permutations_without_repetitions">Размещения без повторений</option>
-        <option value="permutations_with_repetitions">Размещения с повторениями</option>
-        <option value="arrangements_without_repetitions">Перестановки без повторений</option>
-        <option value="arrangements_with_repetitions">Перестановки с повторениями</option>
-        <option value="combinations_without_repetitions">Сочетания без повторений</option>
-        <option value="combinations_with_repetitions">Сочетания с повторениями</option>
-        <option value="urn_model_all_marked_items">Урновая модель (все меченные)</option>
-        <option value="urn_model_r_marked_items">Урновая модель (r меченных)</option>
-    </select>
+        <div id="formulaInputs"></div>
 
-    <div id="formulaInputs">
+        <button type="button" onclick="calculate()">Рассчитать</button>
+    </form>
 
-    </div>
-
-    <button type="button" onclick="calculate()">Рассчитать</button>
-</form>
-
-<div id="result"></div>
+    <div id="result" style="display: none"></div>
+</div>
 
 
 <script>
@@ -42,7 +42,10 @@
 
     function updateInputs() {
         formulaInputs.innerHTML = ''; // Очищаем предыдущие поля ввода
-        document.getElementById("result").textContent = "";
+        const resultId = document.getElementById("result")
+        resultId.textContent = "";
+        resultId.style.display = "none";
+
 
         const selectedFormula = formulaSelect.value;
         switch (selectedFormula) {
@@ -318,7 +321,9 @@
             document.getElementById("result").textContent = "";
             return;
         }
-        document.getElementById("result").textContent = "Результат: " + result;
+        const resultId = document.getElementById("result");
+        resultId.textContent = "Результат: " + result;
+        resultId.style.display = "block";
     }
 
     updateInputs();
